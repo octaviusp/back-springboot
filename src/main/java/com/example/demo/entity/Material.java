@@ -19,10 +19,8 @@ public class Material {
 	String titulo;
 	@Column(name = "costo")
 	Long costo;
-	
 	@Column(name = "id_curso")
-    Long idCurso;
-	
+	Long idCurso;
 	@Column(name = "stock")
 	Long stock;
 
@@ -65,6 +63,5 @@ public class Material {
 	public void setStock(Long stock) {
 		this.stock = stock;
 	}
-	
-	
+
 }

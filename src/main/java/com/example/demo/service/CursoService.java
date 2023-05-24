@@ -12,5 +12,5 @@ public interface CursoService {
 
 	public Curso saveCurso(Curso newCurso);
 
-	public List<Curso> findAllCurso(Long id);
+	public String updateCurso(Curso curso);
 }

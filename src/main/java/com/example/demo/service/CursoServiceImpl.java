@@ -19,20 +19,25 @@ public class CursoServiceImpl implements CursoService {
 	@Override
 	public List<Curso> findAllCurso() {
 		return cursoRepository.findAll();
-	}	
-	
+	}
+
 	@Override
 	public Optional<Curso> findCursoById(Long id) {
 		return cursoRepository.findById(id);
 	}
 
 	@Override
+	public String updateCurso(Curso curso) {
+		if (cursoRepository.findById(curso.getId()) != null) {
+			cursoRepository.save(curso);
+			return "OK";
+		}
+		return "ERROR: el id no existe";
+	}
+
+	@Override
 	public Curso saveCurso(Curso newCurso) {
 		return cursoRepository.save(newCurso);
-	}
-	
-	public List<Curso> findAllCurso(Long id){
-		return cursoRepository.findAllCurso(id);
 	}
 
 }
