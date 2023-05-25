@@ -2,6 +2,7 @@ Back-end para TP de Diseño de Sistemas basado en Spring Boot (Java)
 
 La base de datos está dockerizada. Para usarla hay que correr el comando:
 > docker pull cherckyto/dds-mysql:1.0
+
 > docker run -p 3306:3306 -d cherckyto/dds-mysql:1.0
 
 Si se inicializa el contenedor desde Docker Desktop hay que exponer el puerto 3306 del contenedor. 
