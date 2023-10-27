@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.service.CursoService;
 import com.example.demo.entity.Curso;
+
+@CrossOrigin(origins = "*") // Permitir cualquier origen
 
 @RestController
 public class CursoController {
@@ -36,6 +39,11 @@ public class CursoController {
 	@RequestMapping(value = "/cursos", method = RequestMethod.POST, produces = "application/json")
 	public Curso addCurso(@RequestBody Curso curso) {
 		return cursoService.saveCurso(curso);
+	}
+
+	@RequestMapping(value = "/cursos", method = RequestMethod.DELETE, produces = "application/json")
+	public Boolean deleteCursos(@RequestBody Iterable<Curso> cursos) {
+		return cursoService.deleteCurso(cursos);
 	}
 
 }

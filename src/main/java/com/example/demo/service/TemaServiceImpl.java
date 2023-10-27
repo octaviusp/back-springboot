@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entity.Curso;
 import com.example.demo.entity.Tema;
 import com.example.demo.repository.TemaRepository;
 
@@ -31,12 +32,14 @@ public class TemaServiceImpl implements TemaService {
 	}
 
 	@Override
-	public String deleteTema(Long id) {
-		if (temaRepository.findById(id) != null) {
-			temaRepository.deleteById(id);
-			return "OK";
+	public Boolean deleteTema(Iterable<Tema> temas) {
+		try {
+			System.out.println(temas);
+			temaRepository.deleteAllInBatch(temas);
+			return true;
+		} catch (Exception e) {
+			return false;
 		}
-		return "ERROR: el id no existe";
 	}
 
 	@Override
@@ -48,8 +51,5 @@ public class TemaServiceImpl implements TemaService {
 		return "ERROR: el id no existe";
 	}
 
-	@Override
-	public List<Tema> findLikeNombre(String nombre) {
-		return temaRepository.findByNombreLike(nombre);
-	}
+
 }

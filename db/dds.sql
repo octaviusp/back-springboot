@@ -129,15 +129,15 @@ DROP TABLE IF EXISTS `cursos`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cursos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_tema` int(11) NOT NULL,
+  `id_tema` int(11) DEFAULT NULL,
   `fecha_inicio` date NOT NULL,
-  `id_docente` int(11) NOT NULL,
+  `id_docente` int(11) DEFAULT NULL,
   `nombre` varchar(250) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_docente` (`id_docente`),
   KEY `id_tema` (`id_tema`),
-  CONSTRAINT `cursos_ibfk_1` FOREIGN KEY (`id_docente`) REFERENCES `docentes` (`id`),
-  CONSTRAINT `cursos_ibfk_2` FOREIGN KEY (`id_tema`) REFERENCES `temas` (`id`)
+  CONSTRAINT `cursos_ibfk_1` FOREIGN KEY (`id_docente`) REFERENCES `docentes` (`id`)  ON DELETE SET NULL,
+  CONSTRAINT `cursos_ibfk_2` FOREIGN KEY (`id_tema`) REFERENCES `temas` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -163,11 +163,11 @@ CREATE TABLE `cursos_empresariales` (
   `precio_total` float NOT NULL,
   `id_empresa` int(11) NOT NULL,
   `cantidad_alumnos` int(11) NOT NULL,
-  `id_curso` int(11) NOT NULL,
+  `id_curso` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `cursos_empresariales` (`id_curso`),
   KEY `id_empresa` (`id_empresa`),
-  CONSTRAINT `cursos_empresariales` FOREIGN KEY (`id_curso`) REFERENCES `cursos` (`id`),
+  CONSTRAINT `cursos_empresariales` FOREIGN KEY (`id_curso`) REFERENCES `cursos` (`id`) ON DELETE SET NULL,
   CONSTRAINT `cursos_empresariales_ibfk_1` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -193,11 +193,11 @@ CREATE TABLE `cursos_personales` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `precio_por_alumno` float NOT NULL,
   `id_aula` int(11) NOT NULL,
-  `id_curso` int(11) NOT NULL,
+  `id_curso` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `curso_personal` (`id_curso`),
   KEY `id_aula` (`id_aula`),
-  CONSTRAINT `curso_personal` FOREIGN KEY (`id_curso`) REFERENCES `cursos` (`id`),
+  CONSTRAINT `curso_personal` FOREIGN KEY (`id_curso`) REFERENCES `cursos` (`id`) ON DELETE SET NULL,
   CONSTRAINT `cursos_personales_ibfk_1` FOREIGN KEY (`id_aula`) REFERENCES `aulas` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -272,11 +272,11 @@ CREATE TABLE `material` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `titulo` varchar(255) NOT NULL,
   `costo` float NOT NULL,
-  `id_curso` int(11) NOT NULL,
+  `id_curso` int(11) DEFAULT NULL,
   `stock` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_tema` (`id_curso`),
-  CONSTRAINT `material_ibfk_1` FOREIGN KEY (`id_curso`) REFERENCES `temas` (`id`)
+  CONSTRAINT `material_ibfk_1` FOREIGN KEY (`id_curso`) REFERENCES `temas` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -300,13 +300,13 @@ DROP TABLE IF EXISTS `profesores`;
 CREATE TABLE `profesores` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `profesion` varchar(255) DEFAULT NULL,
-  `id_categoria` int(11) NOT NULL,
-  `id_docente` int(11) NOT NULL,
+  `id_categoria` int(11) DEFAULT NULL,
+  `id_docente` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `docente_profesor` (`id_docente`),
   KEY `id_categoria` (`id_categoria`),
-  CONSTRAINT `docente_profesor` FOREIGN KEY (`id_docente`) REFERENCES `docentes` (`id`),
-  CONSTRAINT `profesores_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id`)
+  CONSTRAINT `docente_profesor` FOREIGN KEY (`id_docente`) REFERENCES `docentes` (`id`) ON DELETE SET NULL,
+  CONSTRAINT `profesores_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -331,10 +331,10 @@ CREATE TABLE `socios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `antiguedad` int(11) NOT NULL,
   `valor_acordado` float NOT NULL,
-  `id_docente` int(11) NOT NULL,
+  `id_docente` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `socio_docente` (`id_docente`),
-  CONSTRAINT `socio_docente` FOREIGN KEY (`id_docente`) REFERENCES `docentes` (`id`)
+  CONSTRAINT `socio_docente` FOREIGN KEY (`id_docente`) REFERENCES `docentes` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

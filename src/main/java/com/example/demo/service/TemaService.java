@@ -12,9 +12,8 @@ public interface TemaService {
 
 	public Tema saveTema(Tema newTema);
 
-	public String deleteTema(Long id);
+	public Boolean deleteTema(Iterable<Tema> temas);
 
 	public String updateTema(Tema tema);
 	
-	public List<Tema> findLikeNombre(String nombre);
 }

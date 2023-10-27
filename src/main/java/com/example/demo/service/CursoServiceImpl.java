@@ -40,4 +40,14 @@ public class CursoServiceImpl implements CursoService {
 		return cursoRepository.save(newCurso);
 	}
 
+	@Override
+	public Boolean deleteCurso(Iterable<Curso> cursos) {
+		try {
+			cursoRepository.deleteAllInBatch(cursos);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
 }
